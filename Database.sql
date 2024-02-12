@@ -1,10 +1,7 @@
--- Drop existing tables if they exist, starting with the ones that have foreign keys
 DROP TABLE IF EXISTS bookings CASCADE;
 DROP TABLE IF EXISTS passengers CASCADE;
 DROP TABLE IF EXISTS flights CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-
--- Create tables
 CREATE TABLE flights (
     flight_id SERIAL PRIMARY KEY,
     flight_number VARCHAR(20) NOT NULL,
@@ -30,8 +27,8 @@ CREATE TABLE bookings (
     passenger_id INT NOT NULL,
     seat_number VARCHAR(10),
     booking_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (flight_id) REFERENCES flights(flight_id),
-    FOREIGN KEY (passenger_id) REFERENCES passengers(passenger_id)
+    FOREIGN KEY (flight_id) REFERENCES flights(flight_id) ON DELETE CASCADE,
+    FOREIGN KEY (passenger_id) REFERENCES passengers(passenger_id) ON DELETE CASCADE
 );
 
 CREATE TABLE users (
@@ -48,7 +45,5 @@ CREATE TABLE users (
     password_reset_token_expiry TIMESTAMP WITH TIME ZONE NULL,
     role VARCHAR(50) NOT NULL
 );
-
--- Create indexes after tables to ensure referenced columns exist
 CREATE INDEX idx_flight_times ON flights(departure_time, arrival_time);
 CREATE INDEX idx_passenger_email ON passengers(email);

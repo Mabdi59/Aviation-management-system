@@ -12,7 +12,7 @@ public class Flight {
     private String arrivalAirportCode;
     private String status;
 
-    // Constructors, Getters, and Setters
+    // Constructors
     public Flight() {}
 
     public Flight(Long flightId, String flightNumber, String aircraftType, OffsetDateTime departureTime, OffsetDateTime arrivalTime, String departureAirportCode, String arrivalAirportCode, String status) {
@@ -26,7 +26,7 @@ public class Flight {
         this.status = status;
     }
 
-    // Getters and setters
+    // Getters and Setters
 
     public Long getFlightId() {
         return flightId;
